@@ -4,6 +4,9 @@
 
 2017年5月4日 10時より開始
 
+## ソースコードの準備
+以下のサイトのfutk2015.tar.bz2をダウンロードし解答する。
+[ロボカップ3D公開ソースコード](http://rc-oz.osdn.jp/pukiwiki/index.php?3D/%B8%F8%B3%AB%A5%BD%A1%BC%A5%B9%A5%EA%A5%B9%A5%C8)
 
 ## ソースコードの表記
 
@@ -34,7 +37,7 @@
 $./AutoMakeFileAM
 
 これは自動的に「src」の配下にあるファイルソースコードを自動的に「Makefile.am」に追加する．<br>
-新しくファイル追加した場合や削除した場合はこれを実行するか直接「Makefile.am」を編集する必要ある．<br>
+新しくファイル追加した場合や削除した場合はこれを実行するか直接「Makefile.am」を編集する必要がある．<br>
 「Makefile.am」を開いて
 
 Agent/AgentTest/AgentTest.hpp<br>
