@@ -5,7 +5,7 @@
 2017年5月4日 10時より開始
 
 ## ソースコードの準備
-以下のサイトのfutk2015.tar.bz2をダウンロードし解答する。
+以下のサイトのfutk2015.tar.bz2をダウンロードし解凍する。
 [ロボカップ3D公開ソースコード](http://rc-oz.osdn.jp/pukiwiki/index.php?3D/%B8%F8%B3%AB%A5%BD%A1%BC%A5%B9%A5%EA%A5%B9%A5%C8)
 
 ## ソースコードの表記
@@ -36,7 +36,7 @@
 
 $./AutoMakeFileAM
 
-これは自動的に「src」の配下にあるファイルソースコードを自動的に「Makefile.am」に追加する．<br>
+このコマンドで自動的に「src」の配下にあるファイルソースコードを「Makefile.am」に追加する．<br>
 新しくファイル追加した場合や削除した場合はこれを実行するか直接「Makefile.am」を編集する必要がある．<br>
 「Makefile.am」を開いて
 
@@ -65,8 +65,8 @@ Agent/AgentTest/AgentTest.cpp
 
 ### コードで直接間接を動かす
 
-Think関数の中に「MoveHeadByCode」関数を呼び出すようにする．<br>
-「MoveHeadByCode」関数を以下のコードを追加し，コンパイルして「ticktack」を実行してみよう．
+「AgentTest.cpp」のThink関数の中に「MoveHeadByCode」関数を呼び出すようにする．<br>
+「MoveHeadByCode」関数に以下のコードを追加し，コンパイルして「ticktack」を実行してみよう．
 
     JointController& jc = SJointController::GetInstance();
     jc.SettingRelativeSpeed(HJ_HJ1, 120.0, 0.05);
@@ -85,11 +85,11 @@ SettingRelativeSpeed関数は目標角度と現在の角度の差が大きけれ
 　「120.0」は120度まで回転させる<br>
 　「0.05」は早さを指定している<br>
 
-関節のIDに関しては「const.hpp」に書いてあるので参照すること．
+関節のIDに関しては「RCOpenFUTK/src/defines/const.hpp」に書いてあるので参照すること．
 
 ### 課題 1
 
-「cycle」変数を使って繰り返し左右にロボットの頭を動かせるようにせよ．
+既に定義済みの「cycle」変数を使ってロボットの頭を左右に繰り返し動かせるようにせよ．
 
 [ヒント]<br>
 cycleは1ずつ進め．<br>
@@ -117,7 +117,7 @@ cycleが0-99の時は右に，cycleが100-199時は左に，200になったらcy
 ## XMLで関節を動かす
 
 XMLというマークアップ言語を使って，モーションを作成する．<br>
-Think関数の中に「MoveHeadByCode」関数をコメント化して，<br>
+Think関数の中に「MoveHeadByCode」関数の呼び出しをコメント化して，<br>
 「MoveHeadByXML」関数を呼び出すようにする．<br>
 ファイルを読み出す部分は
 
@@ -231,6 +231,7 @@ FieldStateクラスからボールや敵エージェントの情報を取得す�
 
 「StrategyInformation」の中の「GetBallDirectionDiff」関数で取得できる．<br>
 例えばボールを向かわせるにはこのような感じで「StrategySample.cpp」のRun関数に書く．
+「ticktack」の実行後，キーボードのBキーでロボットは動き出す．
 
     StrategyInformation& si = SStrategyInformation::GetInstance();
     double rotation = si.GetBallDirectionDiff() / 180.0;
@@ -266,7 +267,7 @@ rotation変数の絶対値が大きい時に前進の速度を減らすように
 
 ![ロボットと目標座標](https://github.com/koyubistrong/koyubistrong.github.io/blob/master/target_and_robot.png "CalcDirectionDiff関数でθを取得できる")
 
-目標座標に移動させるにはこのようにかく．
+目標座標に移動させるにはこのように書く．
 
     StrategyInformation& si = SStrategyInformation::GetInstance();
     Vector2d target_pos(5.0, 10.0);
@@ -288,10 +289,12 @@ CalcDistance関数はこのように使う
     // 座標(2.0, 2.0)と座標(4.0, 3.0)の距離を計算する(Vector3d型はできない)
     double dist = Tool::CalcDistance(p1, p2);
     
+AgentStateクラスから情報を取得したいので先程の情報取得方法を参考にする．
 しかし，AgentStateクラスのGetCoordinates関数はVector3dクラスの型なのでZ座標を削除する必要がある．<br>
 Z座標を削除するにはToolクラスのRemoveVectZ関数を使う必要がある．<br>
 したがって，自分の座標と目的の場所の距離を計算するにはこのように書く．
 
+    AgentState& as = SAgentState::GetInstance();
     Vector2d my_pos = Tool::RemoveVectZ(as.GetCoordinates());
     Vector2d target_pos(5.0, 10.0);
     double target_dist = Tool::CalcDistance(my_pos, target_pos);
@@ -322,7 +325,7 @@ Z座標を削除するにはToolクラスのRemoveVectZ関数を使う必要が�
     Vector2d goal_pos = si.GetCenterEnemyGoalCoord();
     double cross_deg = Tool::CalcCrossDegree(ball_pos, me_pos, goal_pos);
 
-そして，ボールのほうに向かせ，かつ，なす角を0度になるように移動するにはこのようにやる．
+そして，ボールのほうに向かせ，なす角を0度になるように移動するにはこのようにやる．
 
     double horizon_speed = cross_deg / 45.0;
     double rotation = si.GetBallDirectionDiff() / 45.0;
