@@ -310,7 +310,7 @@ Z座標を削除するにはToolクラスのRemoveVectZ関数を使う必要が�
 
 
 ## 練習試合　結果
-###　2017/05/03<br>
+### 2017/05/03<br>
 前半戦　FUT−K	　4-0	AIT-soccer3D<br>
 後半戦　AIT-soccer3D　0-4	FUT-K<br>
 
