@@ -8,6 +8,11 @@
 以下のサイトのfutk2015.tar.bz2をダウンロードし解凍する。
 [ロボカップ3D公開ソースコード](http://rc-oz.osdn.jp/pukiwiki/index.php?3D/%B8%F8%B3%AB%A5%BD%A1%BC%A5%B9%A5%EA%A5%B9%A5%C8)
 
+## 練習試合　結果
+###　2017/05/03
+前半戦　FUT−K	　4-0	AIT-soccer3D
+後半戦　AIT-soccer3D　0-4	FUT-K
+
 ## ソースコードの表記
 
 ソースコードを簡単にするために一部のオブジェクトの別名を以下のようにしている．
