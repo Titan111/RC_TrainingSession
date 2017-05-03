@@ -8,10 +8,6 @@
 以下のサイトのfutk2015.tar.bz2をダウンロードし解凍する。
 [ロボカップ3D公開ソースコード](http://rc-oz.osdn.jp/pukiwiki/index.php?3D/%B8%F8%B3%AB%A5%BD%A1%BC%A5%B9%A5%EA%A5%B9%A5%C8)
 
-## 練習試合　結果
-###　2017/05/03
-前半戦　FUT−K	　4-0	AIT-soccer3D
-後半戦　AIT-soccer3D　0-4	FUT-K
 
 ## ソースコードの表記
 
@@ -311,6 +307,13 @@ Z座標を削除するにはToolクラスのRemoveVectZ関数を使う必要が�
 なので，距離が長い場合は「walk\_->SettingSpeed(1.0, 0.0, rotation);」でもよい．<br>
 距離が短い場合は，θ＝si.CalcDirectionDiff(target_pos)としてcosθとsinθを使う．<br>
 そして，walkのSettingSpeed関数の第一引数はcosθを入れて，第二引数にはsinθを入れる．
+
+
+## 練習試合　結果
+###　2017/05/03
+前半戦　FUT−K	　4-0	AIT-soccer3D
+後半戦　AIT-soccer3D　0-4	FUT-K
+
 <!--
 ### 課題 4
 
